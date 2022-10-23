@@ -34,12 +34,15 @@ def create_app(test_config=None):
     def hello():
         return 'Hello, World!'
 
+    # import and the database
     from . import db
     db.init_app(app)
 
+    # import and register the auth blueprint from the factory
     from . import auth
     app.register_blueprint(auth.bp)
 
+    # import and register the blog blueprint from the factory
     from . import blog
     app.register_blueprint(blog.bp)
     app.add_url_rule('/', endpoint='index')
