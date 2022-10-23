@@ -1,24 +1,45 @@
 <!doctype html>
-<title>{% block title %}{% endblock %} - Flaskr</title>
+<title>{% block title %}{% endblock %} - Fake Site</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
 <nav>
-  <h1>Flaskr</h1>
-  <ul>
-    {% if g.user %}
-      <li><span>{{ g.user['username'] }}</span>
-      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
-    {% else %}
-      <li><a href="{{ url_for('auth.register') }}">Register</a>
-      <li><a href="{{ url_for('auth.login') }}">Log In</a>
-    {% endif %}
-  </ul>
+  <div class="container text-center">
+    <div class="row">
+      <div class="col">
+        <a class="btn btn-outline-success" href="{{ url_for('index') }}"><h1>Fake Site Fun</h1></a>
+      </div>
+      <div class="col">
+        <ul>
+          {% if g.user %}
+            <ui><span>Welcome {{ g.user['username'] }}!</span>
+            <ui>
+              <a class="btn btn-primary" href="{{ url_for('auth.logout') }}" role="button">
+                  Log Out
+              </a>
+          {% else %}
+            <ui><a class="btn btn-primary" href="{{ url_for('auth.register') }}" role="button">
+              Register
+            </a>
+            <ui><a class="btn btn-primary" href="{{ url_for('auth.login') }}" role="button">
+              Log In
+            </a>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
 </nav>
 <section class="content">
-  <header>
-    {% block header %}{% endblock %}
-  </header>
-  {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
-  {% endfor %}
-  {% block content %}{% endblock %}
+  <div class="container text-center">
+    <header>
+      {% block header %}{% endblock %}
+    </header>
+    <div class="row">
+      <div class="col">
+        {% for message in get_flashed_messages() %}
+          <div class="flash">{{ message }}</div>
+        {% endfor %}
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+  </div>
 </section>
