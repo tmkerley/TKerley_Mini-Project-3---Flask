@@ -57,9 +57,9 @@ def login():
         ).fetchone()
 
         if user is None:
-            error = 'Incorrect username.'
+            error = 'Incorrect credentials.'
         elif not check_password_hash(user['password'], password):
-            error = 'Incorrect password.'
+            error = 'Incorrect credentials.'
 
         if error is None:
             session.clear()
@@ -70,7 +70,7 @@ def login():
 
     return render_template('auth/login.html')
 
-# if a user is logged in their information should be loaded and made available to other views
+# if a user is logged in, their information should be loaded and made available to other views
 @bp.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')
@@ -93,7 +93,7 @@ def login_required(view):
 
     return wrapped_view
 
-#Log out
+# Log out
 @bp.route('/logout')
 def logout():
     session.clear()
