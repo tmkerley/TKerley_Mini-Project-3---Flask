@@ -1,7 +1,7 @@
 # INF 601 - Advanced Python
 # Thomas Kerley
 # Mini Project 3 - Flask
-# Due date: 10.22.2022
+# Due date: 10.23.2022
 
 import os
 
@@ -39,5 +39,9 @@ def create_app(test_config=None):
 
     from . import auth
     app.register_blueprint(auth.bp)
+
+    from . import blog
+    app.register_blueprint(blog.bp)
+    app.add_url_rule('/', endpoint='index')
     
     return app
